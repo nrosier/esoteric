@@ -75,6 +75,9 @@ no runtime, no package manager. Version used here: **v2.0.31**.
 
 Each archive extracts to a folder containing a single self-contained executable.
 
+There are two songs in this folder, `HelloWorld.rock` and `Fibonacci.rock`.
+Both run as `rockstar <file>`.
+
 ### macOS
 
 ```sh
@@ -133,6 +136,85 @@ dotnet build ./Starship/Starship.sln
 | macOS (arm64, v2.0.31 prebuilt binary) | tested — every output below verified |
 | Linux (x64 prebuilt) | archive contents verified; binary not run here |
 | Windows (x64 prebuilt) | archive contents verified; binary not run here |
+
+## `HelloWorld.rock`
+
+Shouts `Hello, World!` without containing a single letter of it.
+
+```
+$ rockstar HelloWorld.rock
+Hello, World!
+```
+
+`Shout "Hello, World!"` would have been one line. Instead the greeting is
+written entirely in **poetic number literals** — the one feature that makes
+Rockstar Rockstar — so the song's lyrics *are* the character codes:
+
+```rockstar
+My heart is burning up                             (7 2     -> 72  -> H)
+My echo is a loneliness everlasting                (1 10 11 -> 101 -> e)
+My longing is a melancholy farewell                (1 10 8  -> 108 -> l)
+My ocean is heartbroken, unbreakable, everlasting  (11 11 11 -> 111 -> o)
+```
+
+Rockstar counts the letters in each word and takes that count **modulo ten** as
+one decimal digit. So `burning up` is 7 then 2, which is 72, which is a capital
+`H`. `everlasting` is eleven letters and therefore a `1`, which is what makes
+`o` sayable at all: 111 needs three odd-length words in a row, and three
+one-letter words in a row is not a lyric.
+
+### Cast turns a number into a letter
+
+```rockstar
+Cast my heart
+Let the song be my heart with my echo with my longing with my longing
+Shout the song
+```
+
+`Cast` is Rockstar's type conversion, and which conversion you get depends on
+what you hand it:
+
+| | Result |
+|---|---|
+| `Cast 72 into X` | number → the character it codes for, so `X` is `"H"` |
+| `Cast my heart` | the same conversion, in place |
+| `Cast "123" with 10` | string → number in the given base, so `123` |
+| `Cast "123"` | string → **array** of code points, `[ 49, 50, 51 ]` |
+
+`Fibonacci.rock` uses the third form (`Cast your heart with 10`) to turn typed
+input into a number; this program uses the second. The fourth is a trap and is
+filed under warts below.
+
+Because `with` is addition — which on strings means concatenation — the greeting
+then assembles in three `Let … be` lines.
+
+### Ten literals, thirteen letters
+
+`Hello, World!` has thirteen characters and only ten distinct ones. Each gets one
+variable, and repeats simply name it again: `my longing` is shouted three times
+as the three `l`s, `my ocean` twice as the two `o`s. The closing newline is not
+in the song at all — `Shout` supplies it, exactly as `Write` withholds it for the
+`N? ` prompt in the other program.
+
+`my finale` is the nicest of the ten. `!` is 33, which needs two three-letter
+words, and the two three-letter words are **`the end`**.
+
+### The wart that is not a wart
+
+`end` closes a block in Rockstar, and `My finale is the end` looks alarmingly
+like an unbalanced one. It parses correctly: once `is` starts a poetic literal
+the rest of the line is counted rather than executed, so the keyword never
+reaches the parser as a keyword. Verified — it yields 33, not a syntax error.
+
+The same rule covers the parenthetical comments above. Rockstar strips them
+before counting the lyric, which is the only reason those annotations can sit on
+the same line as the literals they annotate.
+
+The real trap is **`Cast` on a string with no radix**. It does not parse the
+string — it explodes it into an array of code points, and an array in numeric
+context is its own length, so `Cast "123" into X` followed by `X with 1` prints
+`4` rather than `124`. Always give `Cast` a base when the input is text; that is
+what `with 10` is doing in `Fibonacci.rock`.
 
 ## `Fibonacci.rock`
 

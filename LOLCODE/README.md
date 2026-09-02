@@ -62,6 +62,9 @@ you write clobbers `IT`.
 
 ## Running it
 
+There are two programs in this folder, `HelloWorld.lol` and `Fibonacci.lol`.
+Both take the same `lci <file>` invocation.
+
 The interpreter is [`lci`](https://github.com/justinmeza/lci) 1.3, the reference
 C implementation by Justin Meza. It's ANSI C with no dependencies, so it builds
 about anywhere — but unlike the Shakespeare folder, there's no pip to lean on, so
@@ -121,6 +124,50 @@ routes:
 | macOS (arm64, `brew install lolcode`, `lci` 1.3) | tested, all outputs below verified |
 | Linux | upstream's documented cmake build, not run here |
 | Windows | no upstream support; WSL inherits the Linux path |
+
+## `HelloWorld.lol`
+
+Prints `Hello, World!`.
+
+```
+$ lci HelloWorld.lol
+Hello, World!
+```
+
+LOLCODE is the one language in this repo where Hello World is genuinely a
+one-liner — `VISIBLE "Hello, World!"` and you are done. So this version does it
+the long way instead, because the long way is the part that teaches you
+something:
+
+```
+I HAS A greetin ITZ "Hello"
+I HAS A subjekt ITZ "World"
+I HAS A wurdz ITZ SMOOSH greetin ", " subjekt "!" MKAY
+VISIBLE wurdz
+```
+
+### What each piece is doing
+
+- **`I HAS A x ITZ v`** declares and initialises in one breath. A string is a
+  `YARN`; the other types are `NUMBR` (64-bit signed integer), `NUMBAR` (float),
+  `TROOF` (`WIN`/`FAIL`) and `NOOB` (uninitialised).
+- **`SMOOSH … MKAY`** concatenates. It is one of the few LOLCODE operators that
+  takes any number of arguments rather than exactly two, which is precisely why
+  it needs `MKAY` to say where the list stops. `SUM OF a AN b` never needs one,
+  because it always takes two.
+- **`VISIBLE`** prints and appends a newline. Ending the line with `!` —
+  `VISIBLE wurdz!` — suppresses the newline, which is the opposite of every
+  other language's convention and is very much on brand.
+- **`OBTW … TLDR`** is the multi-line comment; `BTW` is the rest of the line.
+  Both are used freely here, because unlike most languages in this repo LOLCODE
+  actually has comments, and it feels rude not to use them.
+
+### The lack of warts
+
+Nothing to report. `SMOOSH` handles the literal `", "` inline without a
+temporary, `VISIBLE` needs no format string, and the program prints the same
+14 bytes as every other Hello World in this repo. The `Fibonacci.lol` warts
+below are all about numbers, and this program has none.
 
 ## `Fibonacci.lol`
 
