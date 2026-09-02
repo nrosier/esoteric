@@ -59,18 +59,58 @@ Of course it is.
 
 ## Running it
 
+The interpreter is [`shakespearelang`](https://pypi.org/project/shakespearelang/)
+1.0.0 — pure Python, no compiled extensions, so **all three platforms work
+identically**. Needs Python 3.8+ (tested on 3.14).
+
+### macOS / Linux
+
 ```sh
+python3 -m venv .venv
+source .venv/bin/activate
 pip install shakespearelang
 shakespeare run Fibonacci.spl
 ```
 
-Verified with `shakespearelang` (Python). There's also a step debugger, which is
-genuinely delightful — it prints the value of every character and who is
-currently on stage:
+### Windows (PowerShell)
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install shakespearelang
+shakespeare run Fibonacci.spl
+```
+
+### Windows (cmd.exe)
+
+```bat
+py -m venv .venv
+.venv\Scripts\activate.bat
+pip install shakespearelang
+shakespeare run Fibonacci.spl
+```
+
+**Why the virtualenv?** On macOS (Homebrew Python) and most current Linux
+distros, a bare `pip install` fails with `error: externally-managed-environment`
+(PEP 668). A venv sidesteps it everywhere. If you'd rather have it on `PATH`
+permanently, `pipx install shakespearelang` works on all three platforms.
+
+**Tested:** macOS (arm64, Python 3.14.7). Linux and Windows follow from the same
+pip install with no platform-specific steps — pure-Python package, pure-Python
+dependencies (`click`, `tatsu`) — but they have not been run here.
+
+### The debugger
+
+Worth it. It steps through the play and prints the value of every character plus
+who is currently on stage, which is the only sane way to understand an SPL
+program you didn't just write:
 
 ```sh
 shakespeare debug Fibonacci.spl
 ```
+
+`shakespeare console` also gives you a REPL with Romeo and Juliet pre-declared,
+for trying a sentence without writing a whole play.
 
 ## `Fibonacci.spl`
 
