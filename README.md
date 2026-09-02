@@ -52,18 +52,18 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | LOLCODE | [LOLCODE/](LOLCODE/) | 2007 lolcat captions as a grammar. `HAI` … `KTHXBYE`, and arithmetic you have to say out loud. |
 | Rockstar | [Rockstar/](Rockstar/) | Programs are power ballads. Numbers are spelled out as lyrics, one digit per word length. |
 | Chef | [Chef/](Chef/) | Programs are recipes. Ingredients are variables, mixing bowls are stacks, and there are no conditionals whatsoever. |
+| Ook! | [Ook/](Ook/) | Brainfuck for orang-utans. Three words, `Ook.` `Ook?` `Ook!`, in pairs — plus one pair that hands the memory pointer a banana. |
 
 ### On the list
 
 | Language | Flavour of madness |
 |---|---|
 | **COW** | Twelve instructions, all of them variations on `moo`. A Brainfuck derivative for cattle. |
-| **Brainfuck** | The canonical one. Eight characters, one tape, infinite regret. |
+| **Brainfuck** | The canonical one. Eight characters, one tape, infinite regret. A translated one already lurks in [Ook/](Ook/), which doesn't count. |
 | **Befunge** | Two-dimensional. The instruction pointer moves in a direction and code can rewrite itself mid-run. |
 | **Whitespace** | Only spaces, tabs and newlines are significant. Every other language's source is a valid-ish Whitespace program. |
 | **INTERCAL** | 1972's deliberate hostility. Has a `PLEASE` modifier and rejects your program if you grovel too much _or_ too little. |
 | **ArnoldC** | `IT'S SHOWTIME` … `YOU HAVE BEEN TERMINATED`. Every keyword is an Arnold quote. |
-| **Ook!** | Brainfuck for orang-utans. Three tokens: `Ook.`, `Ook?`, `Ook!` |
 | **Piet** | Source code is an abstract bitmap. Programs look like Mondrian paintings. |
 | **Malbolge** | Designed to be as close to impossible as a language can get. The first program was found by a search algorithm, not written. |
 | **Chicken** | The only token is `chicken`. Instructions are encoded by counting them. |
@@ -103,6 +103,7 @@ per-language README rather than here. What every folder README owes you:
 | [LOLCODE](LOLCODE/) | tested (`brew`) | build from source | WSL, or a source build |
 | [Rockstar](Rockstar/) | tested (prebuilt binary) | prebuilt binary | prebuilt binary |
 | [Chef](Chef/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
+| [Ook!](Ook/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
 
 Only the macOS column has actually been run on this machine — the rest follows
 upstream's documented route. Each folder README says which is which.

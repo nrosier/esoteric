@@ -18,6 +18,11 @@ Digit groups, stride 10, group i based at 10+10i, least significant first:
   +4 S  sum accumulator                  +9 F  flag
 """
 
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+
 class BF:
     def __init__(self):
         self.out = []
@@ -57,21 +62,35 @@ b.e('-' * 31 + '.')              # 32 ' '
 b.e('[-]')                       # z2 = 0
 
 # --------------------------------------------------------------- read N
-b.at(c, ',')
-# t = c, u = c ; then u back into c ; t -= 10
-b.e('[').at(t, '+').at(u, '+').at(c, '-').e(']')
-b.at(u, '[').at(c, '+').at(u, '-').e(']')
-b.at(t, '-' * 10)
-b.e('[')                          # while c != '\n'
+def read_char():
+    """Read one character and leave t = 0 if it ends the number.
+
+    t = c - 10 is zero for a newline. A Windows pipe sends the carriage
+    return first, so t == 3 has to stop the loop as well, or 13 is taken
+    for a digit and `echo 10` asks for fib(65).
+    """
+    b.at(c, ',')
+    b.at(t, '[-]')
+    b.at(c, '[').at(t, '+').at(u, '+').at(c, '-').e(']')   # t = u = c
+    b.at(u, '[').at(c, '+').at(u, '-').e(']')              # c restored
+    b.at(t, '-' * 10)
+    b.at(z1, '[-]')
+    b.at(t, '[').at(z1, '+').at(z2, '+').at(t, '-').e(']')  # z1 = z2 = t
+    b.at(z2, '[').at(t, '+').at(z2, '-').e(']')             # t restored
+    b.at(z1, '-' * 3)                                       # z1 = t - 3
+    b.at(f, '+')
+    b.at(z1, '[').at(f, '-').at(z1, '[-]').e(']')           # f = 0 unless t == 3
+    b.at(f, '[').at(t, '[-]').at(f, '-').e(']')             # a return also stops
+    b.to(t)                                                 # the loop tests t
+
+
+read_char()
+b.e('[')                          # while the character is not a line ending
 b.at(c, '-' * 48)                 #   c = digit value
 b.at(n, '[').at(z1, '+').at(n, '-').e(']')          # z1 = n, n = 0
 b.at(z1, '[').at(n, '+' * 10).at(z1, '-').e(']')    # n = 10 * z1
 b.at(c, '[').at(n, '+').at(c, '-').e(']')           # n += digit
-b.at(c, ',')                      #   next char
-b.at(t, '[-]')
-b.at(c, '[').at(t, '+').at(u, '+').at(c, '-').e(']')
-b.at(u, '[').at(c, '+').at(u, '-').e(']')
-b.at(t, '-' * 10)
+read_char()
 b.e(']')
 
 # ------------------------------------------------- a = 0, b = 1 in group 0
@@ -144,7 +163,7 @@ b.at(f, '[').at(z2, '+' * 48 + '.' + '[-]').at(f, '-').e(']')
 b.at(z2, '+' * 10 + '.' + '[-]')
 
 bf = b.code()
-open('/tmp/ookdev/fib.bf', 'w').write(bf + '\n')
+(HERE / 'Fibonacci.bf').open('w').write(bf + '\n')
 
 OOK = {'>': 'Ook. Ook?', '<': 'Ook? Ook.', '+': 'Ook. Ook.', '-': 'Ook! Ook!',
        ',': 'Ook. Ook!', '.': 'Ook! Ook.', '[': 'Ook! Ook?', ']': 'Ook? Ook!'}
@@ -157,7 +176,7 @@ for w in words:
     else:
         cur = w if not cur else cur + ' ' + w
 lines.append(cur)
-open('/tmp/ookdev/fib.ook', 'w').write('\n'.join(lines) + '\n')
+(HERE / 'Fibonacci.ook').open('w').write('\n'.join(lines) + '\n')
 
 print('bf chars :', len(bf))
 print('brackets :', bf.count('['), bf.count(']'))
