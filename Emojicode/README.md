@@ -224,6 +224,38 @@ There is no `--version` flag (`emojicodec --version` answers
 `👉 Flag could not be matched: version`). `--help` identifies itself as
 "Emojicode Compiler 1.0 beta 2", which is how the version above was established.
 
+## `HelloWorldOneLine.emojic`
+
+There are two Hello Worlds in this folder, and this is the honest one:
+
+```
+🏁 🍇 😀 🔤Hello, World!🔤❗️ 🍉
+```
+
+That is the whole file. Twenty-five characters, forty-seven bytes, one line —
+`🏁` is the entry point, `🍇`/`🍉` are the braces, `😀` prints with a newline, and
+`🔤…🔤` is a string literal. Nothing is elided and nothing is golfed; this is
+simply what Emojicode costs you for a Hello World.
+
+```
+$ emojicodec Emojicode/HelloWorldOneLine.emojic && Emojicode/HelloWorldOneLine
+Hello, World!
+```
+
+Byte-identical output to the long version, and to the other five languages'
+fourteen bytes — verified with `cmp`.
+
+Whitespace is not structural here, so every space can go:
+`🏁🍇😀🔤Hello, World!🔤❗️🍉` also compiles and also prints the greeting, at
+twenty-one characters. That is not the file that ships, because nobody would
+write it that way and the four spaces are not the interesting part.
+
+The interesting part is the comparison. Every other Hello World in this repo is
+an exercise in *getting a letter out at all* — Shakespeare needs 23 assignments
+and a stack, Ook! needs 170 instructions and a multiplication loop. Emojicode
+needs one line, because Emojicode is a real language. Which is exactly why the
+other file in this folder exists.
+
 ## `HelloWorld.emojic`
 
 ```
@@ -231,11 +263,11 @@ $ emojicodec Emojicode/HelloWorld.emojic && Emojicode/HelloWorld
 Hello, World!
 ```
 
-The other five Hello Worlds in this repo are exercises in *getting a letter out
-at all*. Emojicode can print a string literal in one line, so a one-line program
-would say nothing about the language. Instead this one is deliberately
-over-engineered — a protocol, a value type, a class, an optional and a generic
-list, which is roughly the shape of an enterprise Java Hello World:
+Same fourteen bytes, thirty-six lines of code. If the one-liner shows what the
+language *costs*, this one shows what the language *has* — and none of it is
+part of the joke. It is deliberately over-engineered — a protocol, a value
+type, a class, an optional and a generic list, which is roughly the shape of an
+enterprise Java Hello World:
 
 | Piece | What it is | Why it's there |
 |---|---|---|
