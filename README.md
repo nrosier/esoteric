@@ -50,6 +50,7 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 |---|---|---|
 | Shakespeare | [Shakespeare/](Shakespeare/) | Source code is a stage play. Characters are variables, dialogue is assignment, insults are negative numbers. |
 | LOLCODE | [LOLCODE/](LOLCODE/) | 2007 lolcat captions as a grammar. `HAI` … `KTHXBYE`, and arithmetic you have to say out loud. |
+| Rockstar | [Rockstar/](Rockstar/) | Programs are power ballads. Numbers are spelled out as lyrics, one digit per word length. |
 
 ### On the list
 
@@ -61,7 +62,6 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | **Whitespace** | Only spaces, tabs and newlines are significant. Every other language's source is a valid-ish Whitespace program. |
 | **INTERCAL** | 1972's deliberate hostility. Has a `PLEASE` modifier and rejects your program if you grovel too much _or_ too little. |
 | **Chef** | Programs are recipes. They must be valid programs _and_ plausible food. |
-| **Rockstar** | Programs are power ballads. Written so devs could legitimately call themselves rockstar developers. |
 | **ArnoldC** | `IT'S SHOWTIME` … `YOU HAVE BEEN TERMINATED`. Every keyword is an Arnold quote. |
 | **Ook!** | Brainfuck for orang-utans. Three tokens: `Ook.`, `Ook?`, `Ook!` |
 | **Piet** | Source code is an abstract bitmap. Programs look like Mondrian paintings. |
@@ -101,6 +101,7 @@ per-language README rather than here. What every folder README owes you:
 |---|---|---|---|
 | [Shakespeare](Shakespeare/) | tested | pip, identical to macOS | pip, pure Python |
 | [LOLCODE](LOLCODE/) | tested (`brew`) | build from source | WSL, or a source build |
+| [Rockstar](Rockstar/) | tested (prebuilt binary) | prebuilt binary | prebuilt binary |
 
 Only the macOS column has actually been run on this machine — the rest follows
 upstream's documented route. Each folder README says which is which.
