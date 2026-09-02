@@ -1,0 +1,42 @@
+Hello World Shortbread.
+
+A shortbread that greets you back. Every quantity in the ingredient list is a
+character code, and the method stirs them in backwards - Chef empties a baking
+dish from the top down, so the last thing added is the first thing printed.
+The flour goes in three times and the almonds twice, because "Hello, World!"
+has three l's and two o's, and an ingredient can be reused as often as you
+like. Liquefying the bowl at the end is what turns thirteen numbers into
+thirteen letters. There is no newline in the list because the interpreter
+supplies one; see the README.
+
+Ingredients.
+72 g butter
+101 g caster sugar
+108 g plain flour
+111 g ground almonds
+44 g cocoa powder
+32 g candied peel
+87 g mascarpone
+114 g dark chocolate
+100 g icing sugar
+33 g runny honey
+
+Method.
+Put runny honey into the mixing bowl.
+Put icing sugar into the mixing bowl.
+Put plain flour into the mixing bowl.
+Put dark chocolate into the mixing bowl.
+Put ground almonds into the mixing bowl.
+Put mascarpone into the mixing bowl.
+Put candied peel into the mixing bowl.
+Put cocoa powder into the mixing bowl.
+Put ground almonds into the mixing bowl.
+Put plain flour into the mixing bowl.
+Put plain flour into the mixing bowl.
+Put caster sugar into the mixing bowl.
+Put butter into the mixing bowl.
+Liquefy contents of the mixing bowl.
+Pour contents of the mixing bowl into the baking dish.
+
+Serves 1.
+

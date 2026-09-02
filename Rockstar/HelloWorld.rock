@@ -1,0 +1,37 @@
+(Hello World: a power ballad in which no letter is ever written down.)
+(Rockstar counts the letters of each word in a poetic literal, one digit)
+(per word, so "burning up" is 7 then 2, which is 72, which is the code)
+(for a capital H. Cast turns that number into the character it stands)
+(for, and "with" glues the characters together.)
+(There is not one string literal in this song. Not one letter.)
+(Rockstar v2. Everything in brackets is a comment, which is why Rockstar)
+(has no parentheses in its expressions.)
+
+My heart is burning up                             (7 2     -> 72  -> H)
+My echo is a loneliness everlasting                (1 10 11 -> 101 -> e)
+My longing is a melancholy farewell                (1 10 8  -> 108 -> l)
+My ocean is heartbroken, unbreakable, everlasting  (11 11 11 -> 111 -> o)
+My pause is cold fire                              (4 4     -> 44  -> comma)
+My silence is why me                               (3 2     -> 32  -> space)
+My wonder is farewell tonight                      (8 7     -> 87  -> W)
+My rage is a heartbroken fire                      (1 11 4  -> 114 -> r)
+My dream is a melancholy wilderness                (1 10 10 -> 100 -> d)
+My finale is the end                               (3 3     -> 33  -> bang)
+
+Cast my heart
+Cast my echo
+Cast my longing
+Cast my ocean
+Cast my pause
+Cast my silence
+Cast my wonder
+Cast my rage
+Cast my dream
+Cast my finale
+
+Let the song be my heart with my echo with my longing with my longing
+Let the song be the song with my ocean with my pause with my silence
+Let the song be the song with my wonder with my ocean with my rage
+Let the song be the song with my longing with my dream with my finale
+
+Shout the song

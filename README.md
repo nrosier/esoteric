@@ -54,6 +54,44 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | Chef | [Chef/](Chef/) | Programs are recipes. Ingredients are variables, mixing bowls are stacks, and there are no conditionals whatsoever. |
 | Ook! | [Ook/](Ook/) | Brainfuck for orang-utans. Three words, `Ook.` `Ook?` `Ook!`, in pairs — plus one pair that hands the memory pointer a banana. |
 
+### Programs so far
+
+| Language | Hello World | Fibonacci |
+|---|---|---|
+| [Shakespeare](Shakespeare/) | [`HelloWorld.spl`](Shakespeare/HelloWorld.spl) | [`Fibonacci.spl`](Shakespeare/Fibonacci.spl) |
+| [LOLCODE](LOLCODE/) | [`HelloWorld.lol`](LOLCODE/HelloWorld.lol) | [`Fibonacci.lol`](LOLCODE/Fibonacci.lol) |
+| [Rockstar](Rockstar/) | [`HelloWorld.rock`](Rockstar/HelloWorld.rock) | [`Fibonacci.rock`](Rockstar/Fibonacci.rock) |
+| [Chef](Chef/) | [`HelloWorld.chef`](Chef/HelloWorld.chef) | [`Fibonacci.chef`](Chef/Fibonacci.chef) |
+| [Ook!](Ook/) | [`HelloWorld.ook`](Ook/HelloWorld.ook) | [`Fibonacci.ook`](Ook/Fibonacci.ook) |
+
+Every Hello World prints the same fourteen bytes, `Hello, World!` and a newline.
+Every Fibonacci prints `N? ` and then the answer. Verified on a real interpreter
+in all ten cases, which is house rule 3 and the only rule that matters.
+
+#### Hello World, five ways
+
+Reusing the same problems is what makes the languages comparable, and Hello World
+is the sharpest comparison available precisely because there is no algorithm in
+it. Strip out the computing and what's left is how a language *says a letter*:
+
+| | How the greeting is spelled | The three `l`s and two `o`s | Size |
+|---|---|---|---|
+| Shakespeare | one character code at a time, each built from powers of two, spoken aloud by Juliet | pushed onto her stack, popped back when the letter returns | 23 assignments, 14 `Speak your mind!` |
+| LOLCODE | a string literal, glued together with `SMOOSH` | nothing to do; it's a string | 4 statements |
+| Rockstar | poetic number literals — the word lengths of the lyrics *are* the codes — then `Cast` | name the same variable again | 10 literals, 3 concatenations |
+| Chef | quantities in the ingredient list, `Liquefy`d from numbers into letters | stir the same ingredient in again | 10 ingredients, 13 `Put`s |
+| Ook! | eleven tape cells filled by a single multiplication loop | walk back to the cell and print it again | 170 instructions, 340 Ooks |
+
+Three of the five have no strings at all: in Shakespeare, Chef and Ook! the
+greeting exists only as numbers, and the letters appear at the moment of
+printing. Rockstar *has* string literals and this program refuses to use one.
+LOLCODE has them and uses them, which is why LOLCODE is the only one whose Hello
+World looks like a Hello World.
+
+The repeated letters are the accidental highlight. Every language handles them,
+and no two handle them the same way — a stack, a variable, a shopping list, a
+pointer that comes back.
+
 ### On the list
 
 | Language | Flavour of madness |

@@ -47,6 +47,77 @@ Two reads, six prints, and 466 instructions whose entire job is moving the
 pointer somewhere else. That ratio is the honest summary of programming in this
 family of languages.
 
+## `HelloWorld.ook`
+
+```bash
+$ bfi HelloWorld.bf
+Hello, World!
+```
+
+170 instructions — 340 Ooks over 25 lines — against Fibonacci's 964:
+
+| | `>` | `<` | `+` | `-` | `[` | `]` | `.` | `,` | banana |
+|---|---|---|---|---|---|---|---|---|---|
+| count | 22 | 19 | 107 | 6 | 1 | 1 | 14 | 0 | 0 |
+
+One loop, no input, 1,106 instructions executed at run time. This is Ook! at its
+least painful: nothing has to be computed, only fourteen numbers reached.
+
+### Counting up to `H`
+
+Ook! has no literals. `Ook. Ook.` adds one to the cell under the pointer, and
+that is the only way to get a value anywhere, so every character code is counted
+from zero.
+
+The obvious way is to walk a single cell through the greeting: reach 72, print,
+climb 29 to 101, print, climb 7 to 108, print. That costs the sum of the gaps
+between consecutive characters, which for `Hello, World!\n` is **376**
+increments — more than twice this program, for a third of the thought.
+
+`generate_hello.py` multiplies instead. One counter cell holds 10 and is ticked
+down ten times; each pass adds `k` to every letter cell, so each letter cell ends
+holding `10 × k` and needs only a small nudge to land on its character:
+
+```
+     0  counter   10, ticked down by the setup loop
+     1  H   72 = 10×7  + 2
+     2  e  101 = 10×10 + 1
+     3  \n  10 = 10×1  + 0
+     4  !   33 = 10×3  + 3
+     5  d  100 = 10×10 + 0
+     6  l  108 = 10×11 − 2
+     7  r  114 = 10×11 + 4
+     8  o  111 = 10×11 + 1
+     9  W   87 = 10×9  − 3
+    10  ,   44 = 10×4  + 4
+    11  ' ' 32 = 10×3  + 2
+```
+
+The eleven multipliers sum to 80, so the loop body is 80 increments plus 22
+pointer moves, run ten times but written once. No nudge is bigger than 4, and
+each is applied on the printing walk's first visit to its cell — so the nudges
+cost 22 increments and **no pointer movement at all**.
+
+### Eleven cells for fourteen characters
+
+A cell keeps its value after `Ook! Ook.` prints it, so the three `l`s and two
+`o`s are free: the walk simply comes back to cells 6 and 8 and prints again.
+Shakespeare needed a stack to manage the same repeats, and Chef needed the
+ingredient list; on a tape, repetition is the one thing that costs nothing.
+
+### The cells are in a deliberately strange order
+
+`H e \n ! d l r o W , ' '` looks arbitrary and is not. Printing walks the tape in
+the order of the greeting — `H e l l o , ' ' W o r l d !` and then back down to
+the newline — and every step of that walk is `>` or `<` repeated. Laying the
+cells out in first-appearance order costs 26 moves; this order costs **19**.
+
+It is the cheapest of 4,000 randomised local searches over the 11! orderings,
+which at eleven cells is almost certainly optimal. Nothing depends on it being
+optimal — it is 7 instructions out of 170 — but a seventh of the pointer traffic
+is a seventh of the pointer traffic, and this is a language where two thirds of
+Fibonacci's instructions do nothing but move.
+
 ## Why Fibonacci is hard here, and why this program is 964 instructions
 
 The naive version is about thirty instructions: keep `a` and `b` in two cells
@@ -193,10 +264,14 @@ route is the one the language's own isomorphism suggests: translate to
 Brainfuck and run that. `ook2bf.py` does the translation, `bfi` runs it, and
 both work identically on all three platforms because both are pure Python.
 
-`Fibonacci.bf` is committed alongside `Fibonacci.ook`, so you can skip the
+Each `.bf` file is committed alongside its `.ook`, so you can skip the
 translation step if you only want the answer — but the `.ook` file is the
 program, and `python3 ook2bf.py Fibonacci.ook` regenerates the `.bf` byte for
 byte.
+
+`HelloWorld` reads no input, so it is the shorter demonstration:
+`bfi HelloWorld.bf` and that is the whole invocation. Everything below uses
+`Fibonacci` because it is the one that needs a pipe.
 
 ### macOS (tested)
 
@@ -272,15 +347,19 @@ Two Windows-specific notes, both real:
 | | Version | Result |
 |---|---|---|
 | macOS | 26.6.2 (25G83) | ✅ every case in this README |
-| CPython | 3.14.7 | ✅ `ook2bf.py`, `generate.py`, `trace.py` |
-| `bfi` | 1.1.1 | ✅ `n = 0…60` plus 90, 100, 128, 200, 255, all exact against Python |
+| CPython | 3.14.7 | ✅ `ook2bf.py`, `generate.py`, `generate_hello.py`, `trace.py` |
+| `bfi` | 1.1.1 | ✅ `HelloWorld.bf`, byte-exact; `n = 0…60` plus 90, 100, 128, 200, 255, all exact against Python |
 | Linux | — | ❌ not run; same pip route, pure Python |
 | Windows | — | ❌ not run; commands above are upstream's, adapted |
 
 The `n = 0…60` sweep compares `bfi`'s output byte for byte against Python's own
 Fibonacci, including the `N? ` prompt and the trailing newline. Timings on this
 machine: `n = 10` 0.06 s (18,727 instructions executed), `n = 100` 0.13 s
-(1,413,401), `n = 255` 0.51 s (9,198,473).
+(1,413,401), `n = 255` 0.51 s (9,198,473). `HelloWorld.bf` executes 1,106
+instructions and is not worth timing.
+
+`ook2bf.py HelloWorld.ook` also reproduces `HelloWorld.bf` byte for byte, so the
+`.ook` file — not the `.bf` — is the thing that was verified.
 
 ## The interpreter zoo
 
@@ -339,18 +418,26 @@ Two honest consequences of that table:
 
 | File | What it is |
 |---|---|
+| `HelloWorld.ook` | **a program** — 340 Ooks, the gentle one |
+| `HelloWorld.bf` | the same program as Brainfuck, committed for convenience |
 | `Fibonacci.ook` | **the program** — 964 instructions of ape |
-| `Fibonacci.bf` | the same program as Brainfuck, committed for convenience |
+| `Fibonacci.bf` | the same, as Brainfuck |
 | `ook2bf.py` | Ook! → Brainfuck translator. Rejects odd Ook counts, non-Ook words, and bananas |
-| `generate.py` | the assembler that emits both files. Nobody hand-writes 1,928 Ooks; this is where the algorithm actually lives, in named cells with comments Ook! cannot have |
-| `trace.py` | debugging aid: runs either file and dumps the digit groups afterwards. Not the proof — `bfi` is |
+| `generate.py` | the assembler that emits the two Fibonacci files. Nobody hand-writes 1,928 Ooks; this is where the algorithm actually lives, in named cells with comments Ook! cannot have |
+| `generate_hello.py` | the same idea for the two HelloWorld files: the tape layout, the multipliers and the reasoning, in Python that can be read |
+| `trace.py` | debugging aid: runs any of the four files and dumps the tape afterwards. Not the proof — `bfi` is |
 
-`generate.py` is deterministic and reproduces both committed files byte for
+Both generators are deterministic and reproduce their committed files byte for
 byte, which is also the regression test:
 
 ```bash
-python3 generate.py && git diff --exit-code Fibonacci.ook Fibonacci.bf
+python3 generate.py && python3 generate_hello.py && git diff --exit-code *.ook *.bf
 ```
+
+`trace.py` labels the tape with Fibonacci's cell names (`SENT`, `c`, `t`, `n`, …)
+because that is what it was written for. Pointed at `HelloWorld.ook` its
+`output:` and `steps:` lines are still right, but read the cell names as cell
+numbers.
 
 ### The same problem, five ways
 

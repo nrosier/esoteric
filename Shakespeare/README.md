@@ -39,7 +39,7 @@ So constants are built as `± 2^(number of adjectives)`. Anything that isn't a
 power of two has to be assembled with arithmetic, which is why printing a
 three-character prompt takes eight sentences.
 
-### The statements used in this program
+### The statements these two programs use
 
 | Sentence | Meaning |
 |---|---|
@@ -49,6 +49,8 @@ three-character prompt takes eight sentences.
 | `Listen to your heart.` | read an integer from stdin into `you` |
 | `Open your heart!` | print `you` as a **number** |
 | `Speak your mind!` | print `you` as a **character** (ASCII) |
+| `Remember yourself.` | push `you`'s own value onto `you`'s stack |
+| `Recall a happier time.` | pop `you`'s stack back into `you` |
 | `Are you worse than a rose?` | set the global condition flag to `you < 1` |
 | `Are you as good as nothing?` | set the global condition flag to `you == 0` |
 | `If so, let us proceed to Scene IV.` | jump if the flag is true |
@@ -62,6 +64,9 @@ Of course it is.
 The interpreter is [`shakespearelang`](https://pypi.org/project/shakespearelang/)
 1.0.0 — pure Python, no compiled extensions, so **all three platforms work
 identically**. Needs Python 3.8+ (tested on 3.14).
+
+There are two plays in this folder, `HelloWorld.spl` and `Fibonacci.spl`.
+They run the same way; substitute one filename for the other.
 
 ### macOS / Linux
 
@@ -111,6 +116,81 @@ shakespeare debug Fibonacci.spl
 
 `shakespeare console` also gives you a REPL with Romeo and Juliet pre-declared,
 for trying a sentence without writing a whole play.
+
+## `HelloWorld.spl`
+
+Prints `Hello, World!`. SPL has no strings and no string literals — the only way
+to emit a letter is `Speak your mind!`, which prints a single character code —
+so the play spells the greeting out loud, one letter per breath.
+
+```
+$ shakespeare run HelloWorld.spl
+Hello, World!
+```
+
+23 assignments, 14 `Speak your mind!`, three `Remember`s and three `Recall`s.
+
+### The cast, and what they actually are
+
+| Character | Role |
+|---|---|
+| **Romeo** | pure verb, like The Ghost in the other play. He holds nothing and is never printed; he exists so that somebody can address Juliet, because `you` needs a speaker. |
+| **Juliet** | the entire program. She is the current character code, and every `Speak your mind!` prints her. Her stack holds the letters that come round again. |
+
+### Letters are deltas, not literals
+
+Every number in SPL is built out of powers of two, because that is the only kind
+of number the language can write down: a noun is ±1 and each adjective doubles
+it, so `a brave bold fine hero` is 8 and there is no way at all to say 29.
+Building each letter from zero would mean a full binary decomposition every
+time. Adjusting Juliet from the previous letter is much cheaper, because
+consecutive letters of English sit close together:
+
+| | Code | How Juliet gets there | Sentences |
+|---|---|---|---|
+| `H` | 72 | `64 + 8`, from nothing | 1 |
+| `e` | 101 | `+32 −2 −1` | 3 |
+| `l` | 108 | `+8 −1`, then remembered twice | 2 |
+| `l` | 108 | `Recall` | 0 |
+| `o` | 111 | `+4 −1`, then remembered | 2 |
+| `,` | 44 | `−64 −2 −1` | 3 |
+| (space) | 32 | `−8 −4` | 2 |
+| `W` | 87 | `+64 −8 −1` | 3 |
+| `o` | 111 | `Recall` | 0 |
+| `r` | 114 | `+4 −1` | 2 |
+| `l` | 108 | `Recall` | 0 |
+| `d` | 100 | `−8` | 1 |
+| `!` | 33 | `−64 −2 −1` | 3 |
+| newline | 10 | `8 + 2`, from scratch | 1 |
+
+The newline is the one letter that ignores the pattern: 10 is one sentence built
+fresh — `the sum of a brave bold fine hero and a fine hero` — against four spent
+subtracting 23 from the closing `!`. It is the same sentence the Fibonacci play
+ends on.
+
+### The trick worth stealing: her stack spells the repeats
+
+`Hello, World!` has three `l`s and two `o`s, and walking back to a letter costs
+sentences. Juliet does not walk back. She pushes the code the first time she
+says the letter and pops it when the letter returns:
+
+```
+Romeo:
+ ... Speak your mind! Remember yourself. Remember yourself.
+Romeo:
+ Recall the letter thou hast twice set aside. Speak your mind!
+```
+
+`Remember yourself` pushes the addressee's own value onto the addressee's stack,
+and `Recall` pops it back. Everything after `Recall` is decoration the
+interpreter discards, which makes it the only place inside an SPL sentence where
+you may write whatever you like.
+
+One stack is enough here because the repeats **nest like brackets**: `l` … `o` …
+`o` … `l`. The second `o` is wanted before the third `l`, and `o` went onto the
+stack after `l`, so last-in-first-out hands them back in exactly the order the
+greeting needs. A message that interleaved them instead — `o`, `l`, `o`, `l` —
+would defeat a single stack, and Juliet would be back to doing arithmetic.
 
 ## `Fibonacci.spl`
 
