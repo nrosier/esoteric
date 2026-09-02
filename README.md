@@ -64,7 +64,7 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | [Rockstar](Rockstar/) | [`HelloWorld.rock`](Rockstar/HelloWorld.rock) | [`Fibonacci.rock`](Rockstar/Fibonacci.rock) |
 | [Chef](Chef/) | [`HelloWorld.chef`](Chef/HelloWorld.chef) | [`Fibonacci.chef`](Chef/Fibonacci.chef) |
 | [Ook!](Ook/) | [`HelloWorld.ook`](Ook/HelloWorld.ook) | [`Fibonacci.ook`](Ook/Fibonacci.ook) |
-| [Emojicode](Emojicode/) | [`HelloWorld.emojic`](Emojicode/HelloWorld.emojic) | [`Fibonacci.emojic`](Emojicode/Fibonacci.emojic) |
+| [Emojicode](Emojicode/) | [`HelloWorld.emojic`](Emojicode/HelloWorld.emojic) · [`HelloWorldOneLine.emojic`](Emojicode/HelloWorldOneLine.emojic) | [`Fibonacci.emojic`](Emojicode/Fibonacci.emojic) |
 
 Every Hello World prints the same fourteen bytes, `Hello, World!` and a newline.
 Every Fibonacci prints `N? ` and then the answer. Verified on a real interpreter
@@ -83,18 +83,28 @@ it. Strip out the computing and what's left is how a language *says a letter*:
 | Rockstar | poetic number literals — the word lengths of the lyrics *are* the codes — then `Cast` | name the same variable again | 10 literals, 3 concatenations |
 | Chef | quantities in the ingredient list, `Liquefy`d from numbers into letters | stir the same ingredient in again | 10 ingredients, 13 `Put`s |
 | Ook! | eleven tape cells filled by a single multiplication loop | walk back to the cell and print it again | 170 instructions, 340 Ooks |
-| Emojicode | four string literals handed over by five objects implementing a protocol | the literals contain them; nothing to arrange | 3 type declarations, 1 print |
+| Emojicode | a string literal, printed. Or, in the long version, four literals handed over by five objects implementing a protocol | the literals contain them; nothing to arrange | 1 line — or 3 type declarations and 1 print |
 
 Three of the six have no strings at all: in Shakespeare, Chef and Ook! the
 greeting exists only as numbers, and the letters appear at the moment of
 printing. Rockstar *has* string literals and this program refuses to use one.
-LOLCODE has them and uses them, which is why LOLCODE is the only one whose Hello
-World looks like a Hello World.
+LOLCODE and Emojicode both have them and both just print one, which makes them
+the only two that are structurally Hello Worlds at all — and LOLCODE the only one
+you can read aloud.
 
-Emojicode breaks the exercise, which is why it's interesting. It could do this in
-one line — it has string literals, a `print`, and no obstacle worth writing about
-— so the effort went the other way, into a protocol, a value type, a class and an
-optional. It is the only entry here that is long *on purpose*.
+Emojicode breaks the exercise, which is why it gets two files. It has string
+literals, a `print`, and no obstacle worth writing about, so
+[`HelloWorldOneLine.emojic`](Emojicode/HelloWorldOneLine.emojic) is the whole
+program in twenty-five characters:
+
+```
+🏁 🍇 😀 🔤Hello, World!🔤❗️ 🍉
+```
+
+That is the honest answer and it is boring, so the effort went the other way as
+well, into a protocol, a value type, a class and an optional. Emojicode is the
+only entry here that is long *on purpose* — and the only one where the short
+version needed writing down to make the point.
 
 The repeated letters are the accidental highlight in the other five. Every
 language handles them, and no two handle them the same way — a stack, a variable,

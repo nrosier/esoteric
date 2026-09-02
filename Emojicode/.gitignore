@@ -2,4 +2,5 @@
 # The executables have no extension, hence the bare names.
 *.o
 HelloWorld
+HelloWorldOneLine
 Fibonacci
