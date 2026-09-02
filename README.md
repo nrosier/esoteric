@@ -45,13 +45,13 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | Language | Folder | Flavour of madness |
 |---|---|---|
 | Shakespeare | [Shakespeare/](Shakespeare/) | Source code is a stage play. Characters are variables, dialogue is assignment, insults are negative numbers. |
+| LOLCODE | [LOLCODE/](LOLCODE/) | 2007 lolcat captions as a grammar. `HAI` … `KTHXBYE`, and arithmetic you have to say out loud. |
 
 ### On the list
 
 | Language | Flavour of madness |
 |---|---|
 | **COW** | Twelve instructions, all of them variations on `moo`. A Brainfuck derivative for cattle. |
-| **LOLCODE** | `HAI` / `KTHXBYE`, `VISIBLE` for print, `IM IN YR LOOP`. 2007 cat memes as a grammar. |
 | **Brainfuck** | The canonical one. Eight characters, one tape, infinite regret. |
 | **Befunge** | Two-dimensional. The instruction pointer moves in a direction and code can rewrite itself mid-run. |
 | **Whitespace** | Only spaces, tabs and newlines are significant. Every other language's source is a valid-ish Whitespace program. |
