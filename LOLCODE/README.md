@@ -62,18 +62,65 @@ you write clobbers `IT`.
 
 ## Running it
 
+The interpreter is [`lci`](https://github.com/justinmeza/lci) 1.3, the reference
+C implementation by Justin Meza. It's ANSI C with no dependencies, so it builds
+about anywhere — but unlike the Shakespeare folder, there's no pip to lean on, so
+each platform differs.
+
+### macOS
+
 ```sh
 brew install lolcode
 lci Fibonacci.lol
 ```
 
-Verified with `lci` 1.3 (the reference C implementation, by Justin Meza).
+**Gotcha:** the binary is called `lci`, and Homebrew *also* has a formula
+literally named `lci` — an unrelated **lambda calculus** interpreter that
+installs a binary of the same name. The two formulae conflict, so installing the
+wrong one silently gets you the wrong language. You want `brew install lolcode`.
+Ask for `lci` and you get a confused lambda evaluator throwing
+`syntax error after '.'` at your cat.
 
-**Gotcha worth knowing:** the binary is called `lci`, and Homebrew *also* has a
-formula literally named `lci` — which is an unrelated **lambda calculus**
-interpreter that installs a binary with the same name. The two formulae conflict.
-You want `brew install lolcode`. Installing `lci` gets you a very confused
-lambda evaluator emitting `syntax error after '.'` at your cat.
+### Linux
+
+No mainstream distro packages it, so build from source:
+
+```sh
+sudo apt install build-essential cmake git      # Debian/Ubuntu
+# sudo dnf install gcc make cmake git           # Fedora
+git clone https://github.com/justinmeza/lci.git
+cd lci
+cmake .
+make
+sudo make install
+lci Fibonacci.lol
+```
+
+Homebrew on Linux also works (`brew install lolcode`), but the formula has no
+Linux bottle — it compiles from source anyway, so you may as well do it directly.
+
+**Skip upstream's `install.py`.** The repo ships one, but it requires **Python
+2.7**, which has been dead since 2020. The plain `cmake . && make` path above
+needs no Python at all.
+
+### Windows
+
+There's no official Windows build, and upstream's docs don't cover it. Two
+routes:
+
+1. **WSL** — the sane option. `wsl --install`, then follow the Linux steps
+   verbatim inside it.
+2. **Native build** — the source is portable ANSI C with CMake, so MSYS2/MinGW
+   or Visual Studio's CMake support should work. Untested, and unsupported
+   upstream.
+
+### What was actually tested
+
+| Platform | Status |
+|---|---|
+| macOS (arm64, `brew install lolcode`, `lci` 1.3) | tested, all outputs below verified |
+| Linux | upstream's documented cmake build, not run here |
+| Windows | no upstream support; WSL inherits the Linux path |
 
 ## `Fibonacci.lol`
 

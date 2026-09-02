@@ -37,6 +37,10 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 5. **Classic problems only.** Hello World, FizzBuzz, Fibonacci, primes,
    factorial, 99 Bottles, reverse a string. Same problems, absurd solutions.
    Reusing the same handful of problems makes the languages comparable.
+6. **Say how to run it on macOS, Linux _and_ Windows.** All three, wherever the
+   interpreter allows it. Mark clearly which platforms were actually tested and
+   which are upstream's instructions taken on faith. If a platform has no sane
+   native route, say so and point at WSL rather than inventing one.
 
 ## The roster
 
@@ -74,16 +78,32 @@ Pull the next one off the list and go.
 
 ## Running things
 
-Each language needs its own interpreter, so setup lives in the per-language
-README rather than here. General approach:
+Each language needs its own interpreter, so the actual setup lives in the
+per-language README rather than here. What every folder README owes you:
 
-- Prefer a **pip / npm / brew installable interpreter** so the folder README can
-  give a one-line install.
-- Note the exact interpreter and version used, since esoteric languages are
-  notorious for having several mutually incompatible "reference"
-  implementations.
-- Where an online interpreter exists, link it too — sometimes that's the whole
-  install story.
+- **All three platforms.** macOS, Linux and Windows, wherever the interpreter
+  can manage it. Esoteric interpreters are usually one-person C or Python
+  projects with uneven platform support, so "how do I even run this" is the real
+  barrier to entry — not the language.
+- **Honesty about what was tested.** These repos accumulate copy-pasted install
+  commands nobody has ever executed. If a platform's instructions came from
+  upstream docs rather than from a terminal, that gets said out loud.
+- **The exact interpreter and version.** Esoteric languages are notorious for
+  having several mutually incompatible "reference" implementations, and the spec
+  is frequently whatever one binary happens to do.
+- **A Windows escape hatch.** Plenty of these interpreters are POSIX-flavoured C
+  with no Windows build. WSL is a perfectly good answer; pretending `apt` exists
+  on Windows is not.
+
+### Current state of play
+
+| Language | macOS | Linux | Windows |
+|---|---|---|---|
+| [Shakespeare](Shakespeare/) | tested | pip, identical to macOS | pip, pure Python |
+| [LOLCODE](LOLCODE/) | tested (`brew`) | build from source | WSL, or a source build |
+
+Only the macOS column has actually been run on this machine — the rest follows
+upstream's documented route. Each folder README says which is which.
 
 ## License
 
