@@ -53,6 +53,7 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | Rockstar | [Rockstar/](Rockstar/) | Programs are power ballads. Numbers are spelled out as lyrics, one digit per word length. |
 | Chef | [Chef/](Chef/) | Programs are recipes. Ingredients are variables, mixing bowls are stacks, and there are no conditionals whatsoever. |
 | Ook! | [Ook/](Ook/) | Brainfuck for orang-utans. Three words, `Ook.` `Ook?` `Ook!`, in pairs — plus one pair that hands the memory pointer a banana. |
+| Emojicode | [Emojicode/](Emojicode/) | Not a joke language wearing a joke's clothes: a real OO language with protocols, generics and optionals, where every type and method name is an emoji and every variable name may not be. |
 
 ### Programs so far
 
@@ -63,12 +64,13 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | [Rockstar](Rockstar/) | [`HelloWorld.rock`](Rockstar/HelloWorld.rock) | [`Fibonacci.rock`](Rockstar/Fibonacci.rock) |
 | [Chef](Chef/) | [`HelloWorld.chef`](Chef/HelloWorld.chef) | [`Fibonacci.chef`](Chef/Fibonacci.chef) |
 | [Ook!](Ook/) | [`HelloWorld.ook`](Ook/HelloWorld.ook) | [`Fibonacci.ook`](Ook/Fibonacci.ook) |
+| [Emojicode](Emojicode/) | [`HelloWorld.emojic`](Emojicode/HelloWorld.emojic) | [`Fibonacci.emojic`](Emojicode/Fibonacci.emojic) |
 
 Every Hello World prints the same fourteen bytes, `Hello, World!` and a newline.
 Every Fibonacci prints `N? ` and then the answer. Verified on a real interpreter
-in all ten cases, which is house rule 3 and the only rule that matters.
+in all twelve cases, which is house rule 3 and the only rule that matters.
 
-#### Hello World, five ways
+#### Hello World, six ways
 
 Reusing the same problems is what makes the languages comparable, and Hello World
 is the sharpest comparison available precisely because there is no algorithm in
@@ -81,16 +83,23 @@ it. Strip out the computing and what's left is how a language *says a letter*:
 | Rockstar | poetic number literals — the word lengths of the lyrics *are* the codes — then `Cast` | name the same variable again | 10 literals, 3 concatenations |
 | Chef | quantities in the ingredient list, `Liquefy`d from numbers into letters | stir the same ingredient in again | 10 ingredients, 13 `Put`s |
 | Ook! | eleven tape cells filled by a single multiplication loop | walk back to the cell and print it again | 170 instructions, 340 Ooks |
+| Emojicode | four string literals handed over by five objects implementing a protocol | the literals contain them; nothing to arrange | 3 type declarations, 1 print |
 
-Three of the five have no strings at all: in Shakespeare, Chef and Ook! the
+Three of the six have no strings at all: in Shakespeare, Chef and Ook! the
 greeting exists only as numbers, and the letters appear at the moment of
 printing. Rockstar *has* string literals and this program refuses to use one.
 LOLCODE has them and uses them, which is why LOLCODE is the only one whose Hello
 World looks like a Hello World.
 
-The repeated letters are the accidental highlight. Every language handles them,
-and no two handle them the same way — a stack, a variable, a shopping list, a
-pointer that comes back.
+Emojicode breaks the exercise, which is why it's interesting. It could do this in
+one line — it has string literals, a `print`, and no obstacle worth writing about
+— so the effort went the other way, into a protocol, a value type, a class and an
+optional. It is the only entry here that is long *on purpose*.
+
+The repeated letters are the accidental highlight in the other five. Every
+language handles them, and no two handle them the same way — a stack, a variable,
+a shopping list, a pointer that comes back. Emojicode is the one that just types
+them.
 
 ### On the list
 
@@ -106,7 +115,6 @@ pointer that comes back.
 | **Malbolge** | Designed to be as close to impossible as a language can get. The first program was found by a search algorithm, not written. |
 | **Chicken** | The only token is `chicken`. Instructions are encoded by counting them. |
 | **Deadfish** | Four commands, no input, overflows constantly. Barely computes. |
-| **Emojicode** | 🍇 real 🍇 blocks 🍉 made 🍉 of emoji. Surprisingly complete. |
 | **Velato** | Source code is a MIDI file. The program is also a piece of music. |
 | **Unlambda** | Pure combinator calculus. No variables at all — just `s`, `k`, and apply. |
 | **Befunge-98 / Fungeoids** | Whole family of grid languages. Rabbit hole warning. |
@@ -142,6 +150,7 @@ per-language README rather than here. What every folder README owes you:
 | [Rockstar](Rockstar/) | tested (prebuilt binary) | prebuilt binary | prebuilt binary |
 | [Chef](Chef/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
 | [Ook!](Ook/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
+| [Emojicode](Emojicode/) | tested (prebuilt x86_64 binary, via Rosetta 2) | prebuilt x86_64 binary | no build exists — WSL |
 
 Only the macOS column has actually been run on this machine — the rest follows
 upstream's documented route. Each folder README says which is which.
