@@ -1,0 +1,40 @@
+💭 Fibonacci in Emojicode.
+💭
+💭 Same problem as the other five folders: read N, print fib(N) after an
+💭 "N? " prompt. Emojicode is the only one of the six with a type system, so
+💭 this is also the only one that can decline bad input politely instead of
+💭 crashing, wrapping or looping forever.
+
+🏁 🍇
+  💭 👄 puts a string on standard output; 😀 is the same thing plus a newline.
+  👄 🔤N? 🔤❗️
+
+  💭 ▶️👂🏼 is an initializer on 🔡 that blocks until Enter. 🔧 trims it.
+  🆕🔡▶️👂🏼❗️ ➡️ typed
+
+  💭 🔢 returns 🍬🔢 — an optional integer — because the text might not be a
+  💭 number at all. This is the conditional-unwrap form of ↪️: the block runs
+  💭 only if there was a value, and n is that value.
+  ↪️ 🔢 🔧 typed❗️ 10❗️ ➡️ n 🍇
+    0 ➡️ 🖍🆕 a
+    1 ➡️ 🖍🆕 b
+
+    💭 Counting down with an explicit ▶️ 0 is also the guard for negative
+    💭 input: the loop simply never runs, and a stays 0.
+    n ➡️ 🖍🆕 countdown
+    🔁 countdown ▶️ 0 🍇
+      a ➕ b ➡️ sum
+      b ➡️ 🖍 a
+      sum ➡️ 🖍 b
+      countdown ⬅️➖ 1
+    🍉
+
+    💭 🧲…🧲 interpolates, and converts the 🔢 to a 🔡 on the way in.
+    😀 🔤🧲a🧲🔤❗️
+  🍉
+  🙅 🍇
+    😀 🔤🤷 that was not a number.🔤❗️
+    💭 🚪 on the 💻 type exits with a status code.
+    🚪 🐇💻 1❗️
+  🍉
+🍉

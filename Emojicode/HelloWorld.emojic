@@ -1,0 +1,63 @@
+💭 Hello World, assembled by a small cast of objects.
+💭
+💭 Emojicode's joke is not that it is hard to read — it is that it is a real
+💭 language wearing a clown suit. So this greeting is deliberately
+💭 over-engineered: a protocol, a value type, a class, an optional and a list,
+💭 which is roughly what an enterprise Java Hello World looks like, except
+💭 every type and method here is named with an emoji and every variable is not.
+
+💭 A protocol. Anything that can hand over a piece of the greeting.
+🐊 🗣 🍇
+  ❗️ 💬 ➡️ 🔡
+🍉
+
+💭 A value type: a word. Copied when passed around, like an integer.
+🕊 📝 🍇
+  🐊 🗣
+
+  🖍🆕 word 🔡
+
+  🆕 🍼 word 🔡 🍇🍉
+
+  ❗️ 💬 ➡️ 🔡 🍇
+    ↩️ word
+  🍉
+🍉
+
+💭 A class: punctuation, which may or may not be there. Heap-allocated,
+💭 passed by reference, and holding an optional 🍬🔡 rather than a 🔡.
+🐇 ✂️ 🍇
+  🐊 🗣
+
+  🖍🆕 mark 🍬🔡
+
+  🆕 🍼 mark 🍬🔡 🍇🍉
+
+  ❗️ 💬 ➡️ 🔡 🍇
+    💭 Conditional unwrapping: the block runs only if there is a value.
+    ↪️ mark ➡️ actual 🍇
+      ↩️ actual
+    🍉
+    ↩️ 🔤🔤
+  🍉
+🍉
+
+🏁 🍇
+  💭 Five speakers. Two words, two marks, and one mark that isn't there.
+  🍿
+    🆕📝 🔤Hello🔤❗️
+    🆕✂️ 🔤, 🔤❗️
+    🆕📝 🔤World🔤❗️
+    🆕✂️ 🔤!🔤❗️
+    🆕✂️ 🤷‍♀️❗️
+  🍆 ➡️ cast
+
+  💭 Ask each one what it has to say, in order.
+  🆕🍨🐚🔡🍆❗️ ➡️ 🖍🆕 words
+  🔂 speaker cast 🍇
+    🐻 words 💬 speaker❗️❗️
+  🍉
+
+  💭 Join with no separator, and say the whole thing exactly once.
+  😀 🆕🔡 words 🔤🔤❗️❗️
+🍉

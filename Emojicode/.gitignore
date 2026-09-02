@@ -1,0 +1,5 @@
+# emojicodec emits an object file and a native executable next to the source.
+# The executables have no extension, hence the bare names.
+*.o
+HelloWorld
+Fibonacci
