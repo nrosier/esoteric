@@ -54,6 +54,7 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | Chef | [Chef/](Chef/) | Programs are recipes. Ingredients are variables, mixing bowls are stacks, and there are no conditionals whatsoever. |
 | Ook! | [Ook/](Ook/) | Brainfuck for orang-utans. Three words, `Ook.` `Ook?` `Ook!`, in pairs — plus one pair that hands the memory pointer a banana. |
 | Emojicode | [Emojicode/](Emojicode/) | Not a joke language wearing a joke's clothes: a real OO language with protocols, generics and optionals, where every type and method name is an emoji and every variable name may not be. |
+| Befunge-93 | [Befunge/](Befunge/) | Source code is a 2D grid; the instruction pointer wanders it in a direction, and turning that direction *is* the control flow. No `if`, no `while`, no variables — just `p`/`g` reads and writes into the grid itself. |
 
 ### Programs so far
 
@@ -65,10 +66,13 @@ Every one of them is a lesson in what "a language" even means, wrapped in a bit.
 | [Chef](Chef/) | [`HelloWorld.chef`](Chef/HelloWorld.chef) | [`Fibonacci.chef`](Chef/Fibonacci.chef) |
 | [Ook!](Ook/) | [`HelloWorld.ook`](Ook/HelloWorld.ook) | [`Fibonacci.ook`](Ook/Fibonacci.ook) |
 | [Emojicode](Emojicode/) | [`HelloWorld.emojic`](Emojicode/HelloWorld.emojic) · [`HelloWorldOneLine.emojic`](Emojicode/HelloWorldOneLine.emojic) | [`Fibonacci.emojic`](Emojicode/Fibonacci.emojic) |
+| [Befunge-93](Befunge/) | [`HelloWorld.bf`](Befunge/HelloWorld.bf) | [`Fibonacci.bf`](Befunge/Fibonacci.bf) |
 
 Every Hello World prints the same fourteen bytes, `Hello, World!` and a newline.
 Every Fibonacci prints `N? ` and then the answer. Verified on a real interpreter
-in all twelve cases, which is house rule 3 and the only rule that matters.
+in all thirteen cases, which is house rule 3 and the only rule that matters —
+though Befunge's is only verified correct for `n = 0…11`; see its README for
+why.
 
 #### Hello World, six ways
 
@@ -117,7 +121,6 @@ them.
 |---|---|
 | **COW** | Twelve instructions, all of them variations on `moo`. A Brainfuck derivative for cattle. |
 | **Brainfuck** | The canonical one. Eight characters, one tape, infinite regret. A translated one already lurks in [Ook/](Ook/), which doesn't count. |
-| **Befunge** | Two-dimensional. The instruction pointer moves in a direction and code can rewrite itself mid-run. |
 | **Whitespace** | Only spaces, tabs and newlines are significant. Every other language's source is a valid-ish Whitespace program. |
 | **INTERCAL** | 1972's deliberate hostility. Has a `PLEASE` modifier and rejects your program if you grovel too much _or_ too little. |
 | **ArnoldC** | `IT'S SHOWTIME` … `YOU HAVE BEEN TERMINATED`. Every keyword is an Arnold quote. |
@@ -161,6 +164,7 @@ per-language README rather than here. What every folder README owes you:
 | [Chef](Chef/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
 | [Ook!](Ook/) | tested (`pip`) | pip, identical to macOS | pip, pure Python |
 | [Emojicode](Emojicode/) | tested (prebuilt x86_64 binary, via Rosetta 2) | prebuilt x86_64 binary | no build exists — WSL |
+| [Befunge-93](Befunge/) | tested (`brew`, linked onto `PATH`) | same Homebrew core formula, untested | no native build — WSL, then the Linux route |
 
 Only the macOS column has actually been run on this machine — the rest follows
 upstream's documented route. Each folder README says which is which.
